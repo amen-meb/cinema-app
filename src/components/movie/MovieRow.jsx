@@ -1,10 +1,15 @@
 import MovieCard from "./MovieCard";
+import SkeletonCard from "./SkeletonCard";
 
 
-function MovieRow({title,movies}){
+function MovieRow({
+title,
+movies=[],
+loading=false
+}){
 
 
-return(
+return (
 
 <section
 className="
@@ -14,11 +19,13 @@ mb-10
 
 
 <h2
+
 className="
 mb-4
 text-2xl
 font-bold
 "
+
 >
 
 {title}
@@ -28,28 +35,61 @@ font-bold
 
 
 <div
+
 className="
 flex
 gap-5
 overflow-x-auto
 pb-4
 "
+
 >
 
 
 {
-movies.map(movie=>(
+
+loading
+
+?
+
+Array.from({length:6}).map((_,index)=>(
+
 <div
-key={movie.id}
+key={index}
 className="
 min-w-[200px]
 "
 >
 
+<SkeletonCard/>
+
+</div>
+
+
+))
+
+
+:
+
+
+movies.map(movie=>(
+
+<div
+
+key={movie.id}
+
+className="
+min-w-[200px]
+"
+
+>
+
 <MovieCard movie={movie}/>
 
 </div>
+
 ))
+
 }
 
 
