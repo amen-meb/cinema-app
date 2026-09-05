@@ -1,8 +1,8 @@
-export default function Home() {
+export default function MovieDetail() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-white">
-        Home Page
+        Movie Detail
       </h1>
     </div>
   );

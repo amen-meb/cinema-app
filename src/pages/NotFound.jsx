@@ -1,8 +1,8 @@
-export default function Home() {
+export default function NotFound() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-white">
-        Home Page
+        404 - Page Not Found
       </h1>
     </div>
   );

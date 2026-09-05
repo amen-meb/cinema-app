@@ -1,8 +1,8 @@
-export default function Home() {
+export default function Browse() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-white">
-        Home Page
+        Browse Movies
       </h1>
     </div>
   );

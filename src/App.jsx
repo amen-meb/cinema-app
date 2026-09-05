@@ -1,31 +1,93 @@
-import useMovies from "./hooks/useMovies";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  const {
-    movies,
-    loading,
-    error,
-  } = useMovies("/movie/popular");
+import Navbar from "./components/layout/Navbar";
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
 
-  if (error) {
-    return <h1>{error}</h1>;
-  }
+import Home from "./pages/Home";
+import Browse from "./pages/Browse";
+import MovieDetail from "./pages/MovieDetail";
+import SearchResults from "./pages/SearchResults";
+import Watchlist from "./pages/Watchlist";
+import NotFound from "./pages/NotFound";
 
-  return (
-    <div>
-      <h1>Popular Movies</h1>
 
-      {movies.map((movie) => (
-        <p key={movie.id}>
-          {movie.title}
-        </p>
-      ))}
-    </div>
-  );
+function App(){
+
+
+return (
+
+<div 
+className="
+min-h-screen
+bg-zinc-950
+text-white
+"
+>
+
+
+<Navbar/>
+
+
+<main
+className="
+pt-24
+px-5
+"
+>
+
+
+<Routes>
+
+
+<Route 
+path="/"
+element={<Home/>}
+/>
+
+
+<Route 
+path="/movies"
+element={<Browse/>}
+/>
+
+
+<Route 
+path="/movie/:id"
+element={<MovieDetail/>}
+/>
+
+
+<Route 
+path="/search"
+element={<SearchResults/>}
+/>
+
+
+<Route 
+path="/watchlist"
+element={<Watchlist/>}
+/>
+
+
+<Route 
+path="*"
+element={<NotFound/>}
+/>
+
+
+</Routes>
+
+
+</main>
+
+
+</div>
+
+
+);
+
+
 }
+
 
 export default App;
