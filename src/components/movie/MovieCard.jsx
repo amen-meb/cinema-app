@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import useWatchlist from "../../hooks/useWatchlist";
+import useToast from "../../hooks/useToast";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -14,6 +15,8 @@ function MovieCard({ movie }) {
 
   const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
   const saved = isInWatchlist(movie.id);
+
+  const { showToast } = useToast();
 
   const year = movie.release_date
     ? movie.release_date.split("-")[0]
@@ -176,8 +179,10 @@ function MovieCard({ movie }) {
             onClick={() => {
                 if (saved) {
                 removeFromWatchlist(movie.id);
+                showToast(`${movie.title} removed from watchlist`);
                 } else {
                 addToWatchlist(movie);
+                showToast(`${movie.title} added to watchlist`);
                 }
             }}
             className="

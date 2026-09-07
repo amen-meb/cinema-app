@@ -8,10 +8,13 @@ import MovieDetail from "./pages/MovieDetail";
 import SearchResults from "./pages/SearchResults";
 import Watchlist from "./pages/Watchlist";
 import NotFound from "./pages/NotFound";
+import Toast from "./components/ui/Toast";
+import useToast from "./hooks/useToast";
 
 
 function App(){
 
+const { toast } = useToast();
 
 return (
 
@@ -30,27 +33,28 @@ text-white
 <main className="pt-24 px-5">
 
 
-<Routes>
+  <Routes>
 
 
-<Route path="/" element={<Home/>}/>
+    <Route path="/" element={<Home/>}/>
 
-<Route path="/movies" element={<Browse/>}/>
+    <Route path="/movies" element={<Browse/>}/>
 
-<Route path="/movie/:id" element={<MovieDetail/>}/>
+    <Route path="/movie/:id" element={<MovieDetail/>}/>
 
-<Route path="/search" element={<SearchResults/>}/>
+    <Route path="/search" element={<SearchResults/>}/>
 
-<Route path="/watchlist" element={<Watchlist/>}/>
+    <Route path="/watchlist" element={<Watchlist/>}/>
 
-<Route path="*" element={<NotFound/>}/>
+    <Route path="*" element={<NotFound/>}/>
 
 
-</Routes>
+  </Routes>
 
 
 </main>
 
+<Toast message={toast}/>
 
 </div>
 
