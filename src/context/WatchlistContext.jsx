@@ -13,12 +13,15 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_MOVIE":
+      const alreadyExists = state.watchlist.some(
+        (movie) => movie.id === action.payload.id
+      );
+      if (alreadyExists) {
+        return state;
+      }
       return {
         ...state,
-        watchlist: [
-          ...state.watchlist,
-          action.payload,
-        ],
+        watchlist: [ ...state.watchlist, action.payload ],
       };
 
     case "REMOVE_MOVIE":

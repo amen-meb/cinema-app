@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 
+import useWatchlist from "../../hooks/useWatchlist";
+
 
 function Navbar() {
 
+  const { watchlist } = useWatchlist();
+  const watchlistCount = watchlist.length;
 
   const links = [
     {
@@ -16,10 +20,6 @@ function Navbar() {
     {
       name:"Search",
       path:"/search"
-    },
-    {
-      name:"Watchlist",
-      path:"/watchlist"
     }
   ];
 
@@ -101,6 +101,42 @@ function Navbar() {
               </NavLink>
             ))
           }
+
+          <NavLink
+            to="/watchlist"
+            className={({ isActive }) =>
+              `
+              text-sm
+              font-medium
+              ${
+                isActive
+                  ? "text-red-500"
+                  : "text-white"
+              }
+              hover:text-red-400
+              `
+            }
+          >
+            <span className="flex items-center gap-2">
+              Watchlist
+
+              {watchlistCount > 0 && (
+                <span
+                  className="
+                    rounded-full
+                    bg-red-600
+                    px-2
+                    py-0.5
+                    text-xs
+                    font-bold
+                    text-white
+                  "
+                >
+                  {watchlistCount}
+                </span>
+              )}
+            </span>
+          </NavLink>
 
         </div>
 
