@@ -9,7 +9,8 @@ function Home(){
 
 const {
 movies: trending,
-loading: trendingLoading
+loading: trendingLoading,
+error: trendingError
 }
 =
 useMovies("/trending/movie/week");
@@ -17,7 +18,8 @@ useMovies("/trending/movie/week");
 
 
 const {
-movies: popular
+movies: popular,
+error: popularError
 }
 =
 useMovies("/movie/popular");
@@ -25,19 +27,22 @@ useMovies("/movie/popular");
 
 
 const {
-movies: topRated
+movies: topRated,
+error: topRatedError
 }
 =
 useMovies("/movie/top_rated");
 
 const {
-movies: popularSeries
+movies: popularSeries,
+error: popularSeriesError
 }
 =
 useMovies("/tv/popular");
 
 const {
-movies: topRatedSeries
+movies: topRatedSeries,
+error: topRatedSeriesError
 }
 =
 useMovies("/tv/top_rated");
@@ -61,6 +66,30 @@ Loading movies...
 
 );
 
+}
+
+const requestError =
+trendingError ||
+popularError ||
+topRatedError ||
+popularSeriesError ||
+topRatedSeriesError;
+
+if (requestError) {
+	return (
+		<div className="mx-auto max-w-3xl rounded-xl border border-red-900 bg-red-950/60 p-8 text-center">
+			<h1 className="text-2xl font-bold text-red-300">
+				Movies could not be loaded
+			</h1>
+			<p className="mt-3 text-red-200">
+				{requestError}
+			</p>
+			<p className="mt-4 text-sm text-gray-300">
+				For Vercel, add VITE_TMDB_KEY under Settings, Environment Variables,
+				then redeploy the project.
+			</p>
+		</div>
+	);
 }
 
 

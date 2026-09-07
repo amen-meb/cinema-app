@@ -13,6 +13,13 @@ VITE_TMDB_KEY=your_tmdb_api_key
 
 The app cannot fetch movies until `VITE_TMDB_KEY` is set. Do not commit the `.env` file.
 
+### Vercel deployment
+
+In the Vercel project, open **Settings > Environment Variables**, add
+`VITE_TMDB_KEY` with your TMDB API key, select the required environments, and
+redeploy. Vite embeds `VITE_` variables during the build, so changing the
+variable requires a new deployment.
+
 ## Pages & Navigation
 
 ● Home page: trending, popular, and top-rated movies and series rows
