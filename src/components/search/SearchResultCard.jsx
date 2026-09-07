@@ -24,7 +24,7 @@ function SearchResultCard({ result }) {
       : "Movie";
 
   const link = isPerson
-    ? "#"
+    ? `/celebrity/${result.id}`
     : isTV
       ? `/tv/${result.id}`
       : `/movie/${result.id}`;

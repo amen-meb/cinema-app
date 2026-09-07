@@ -5,7 +5,8 @@ import SkeletonCard from "./SkeletonCard";
 function MovieRow({
 title,
 movies=[],
-loading=false
+loading=false,
+mediaType="movie"
 }){
 
 
@@ -84,7 +85,7 @@ min-w-[200px]
 
 >
 
-<MovieCard movie={movie}/>
+<MovieCard movie={movie} mediaType={mediaType}/>
 
 </div>
 

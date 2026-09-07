@@ -18,6 +18,14 @@ function Navbar() {
       path:"/movies"
     },
     {
+      name:"Series",
+      path:"/series"
+    },
+    {
+      name:"Celebrities",
+      path:"/celebrities"
+    },
+    {
       name:"Search",
       path:"/search"
     }
@@ -63,7 +71,7 @@ function Navbar() {
           text-red-500
           "
         >
-          🎬 Cinema
+          🎬 CINEVERSE
         </NavLink>
 
 

@@ -1,7 +1,7 @@
 import MovieCard from "./MovieCard";
 
 
-function MovieGrid({movies}) {
+function MovieGrid({ movies, mediaType = "movie" }) {
 
 
 return (
@@ -23,6 +23,7 @@ movies.map(movie=>(
 <MovieCard
 key={movie.id}
 movie={movie}
+mediaType={mediaType}
 />
 ))
 }

@@ -6,7 +6,7 @@ const IMAGE_URL =
 const POSTER_URL =
   "https://image.tmdb.org/t/p/w500";
 
-function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
+function DetailHero({ movie, onTrailerClick, hasTrailer, mediaType = "movie" }) {
   const backdrop = movie.backdrop_path
     ? `${IMAGE_URL}${movie.backdrop_path}`
     : null;
@@ -15,8 +15,10 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
     ? `${POSTER_URL}${movie.poster_path}`
     : null;
 
-  const year = movie.release_date
-    ? movie.release_date.split("-")[0]
+  const title = movie.title || movie.name;
+  const date = movie.release_date || movie.first_air_date;
+  const year = date
+    ? date.split("-")[0]
     : "N/A";
 
   return (
@@ -79,7 +81,7 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
           {poster ? (
             <img
               src={poster}
-              alt={movie.title}
+              alt={title}
               className="
                 w-full
                 rounded-xl
@@ -112,7 +114,7 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
               md:text-6xl
             "
           >
-            {movie.title}
+            {title}
           </h1>
 
           <div
@@ -135,7 +137,9 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
             <span>
               {movie.runtime
                 ? `${movie.runtime} min`
-                : ""}
+                : mediaType === "tv" && movie.number_of_seasons
+                  ? `${movie.number_of_seasons} season${movie.number_of_seasons === 1 ? "" : "s"}`
+                  : ""}
             </span>
           </div>
 

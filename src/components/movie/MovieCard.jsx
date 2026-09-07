@@ -6,7 +6,7 @@ import useToast from "../../hooks/useToast";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, mediaType = "movie" }) {
 
 
   const poster = movie.poster_path
@@ -18,8 +18,13 @@ function MovieCard({ movie }) {
 
   const { showToast } = useToast();
 
-  const year = movie.release_date
-    ? movie.release_date.split("-")[0]
+  const resolvedMediaType = mediaType === "auto"
+    ? (movie.media_type === "tv" || movie.first_air_date ? "tv" : "movie")
+    : mediaType;
+  const title = movie.title || movie.name;
+  const date = movie.release_date || movie.first_air_date;
+  const year = date
+    ? date.split("-")[0]
     : "N/A";
 
 
@@ -43,12 +48,12 @@ function MovieCard({ movie }) {
 
       {/* Movie Poster */}
 
-      <Link to={`/movie/${movie.id}`}>
+      <Link to={`/${resolvedMediaType === "tv" ? "series" : "movie"}/${movie.id}`}>
 
         {poster ? (
         <img
             src={poster}
-            alt={movie.title}
+            alt={title}
             className="
             h-[350px]
             w-full
@@ -108,7 +113,7 @@ function MovieCard({ movie }) {
             text-white
             "
           >
-            {movie.title}
+            {title}
           </h3>
 
 
@@ -127,7 +132,7 @@ function MovieCard({ movie }) {
 
 
           <Link
-            to={`/movie/${movie.id}`}
+            to={`/${resolvedMediaType === "tv" ? "series" : "movie"}/${movie.id}`}
             className="
             mt-4
             inline-block
@@ -179,10 +184,10 @@ function MovieCard({ movie }) {
             onClick={() => {
                 if (saved) {
                 removeFromWatchlist(movie.id);
-                showToast(`${movie.title} removed from watchlist`);
+                showToast(`${title} removed from watchlist`);
                 } else {
                 addToWatchlist(movie);
-                showToast(`${movie.title} added to watchlist`);
+                showToast(`${title} added to watchlist`);
                 }
             }}
             className="
@@ -229,7 +234,7 @@ function MovieCard({ movie }) {
           "
         >
 
-          {movie.title}
+          {title}
 
         </h3>
 

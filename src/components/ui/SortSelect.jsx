@@ -1,6 +1,7 @@
 function SortSelect({
   sortOption,
   onSortChange,
+  options,
 }) {
   return (
     <div className="mb-8 flex items-center gap-3">
@@ -30,25 +31,15 @@ function SortSelect({
           focus:border-red-500
         "
       >
-        <option value="default">
-          Default
-        </option>
-
-        <option value="rating-desc">
-          Rating: High to Low
-        </option>
-
-        <option value="rating-asc">
-          Rating: Low to High
-        </option>
-
-        <option value="year-desc">
-          Newest
-        </option>
-
-        <option value="year-asc">
-          Oldest
-        </option>
+        {(options || [
+          ["default", "Default"],
+          ["rating-desc", "Rating: High to Low"],
+          ["rating-asc", "Rating: Low to High"],
+          ["year-desc", "Newest"],
+          ["year-asc", "Oldest"],
+        ]).map(([value, label]) => (
+          <option key={value} value={value}>{label}</option>
+        ))}
       </select>
     </div>
   );

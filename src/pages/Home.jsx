@@ -30,6 +30,18 @@ movies: topRated
 =
 useMovies("/movie/top_rated");
 
+const {
+movies: popularSeries
+}
+=
+useMovies("/tv/popular");
+
+const {
+movies: topRatedSeries
+}
+=
+useMovies("/tv/top_rated");
+
 
 
 if(trendingLoading){
@@ -107,6 +119,26 @@ title="Top Rated Movies"
 movies={topRated}
 
 />
+
+<MovieRow
+
+title="Popular Series"
+
+movies={popularSeries}
+
+mediaType="tv"
+
+ />
+
+<MovieRow
+
+title="Top Rated Series"
+
+movies={topRatedSeries}
+
+mediaType="tv"
+
+ />
 
 
 </div>

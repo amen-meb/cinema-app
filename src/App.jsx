@@ -1,10 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 import Home from "./pages/Home";
 import Browse from "./pages/Browse";
+import Series from "./pages/Series";
 import MovieDetail from "./pages/MovieDetail";
+import SeriesDetail from "./pages/SeriesDetail";
+import Celebrities from "./pages/Celebrities";
+import CelebrityDetail from "./pages/CelebrityDetail";
 import SearchResults from "./pages/SearchResults";
 import Watchlist from "./pages/Watchlist";
 import NotFound from "./pages/NotFound";
@@ -40,7 +45,15 @@ text-white
 
     <Route path="/movies" element={<Browse/>}/>
 
+    <Route path="/series" element={<Series/>}/>
+
     <Route path="/movie/:id" element={<MovieDetail/>}/>
+
+    <Route path="/series/:id" element={<SeriesDetail/>}/>
+
+    <Route path="/celebrities" element={<Celebrities/>}/>
+
+    <Route path="/celebrity/:id" element={<CelebrityDetail/>}/>
 
     <Route path="/search" element={<SearchResults/>}/>
 
@@ -53,6 +66,8 @@ text-white
 
 
 </main>
+
+<Footer />
 
 <Toast message={toast}/>
 
