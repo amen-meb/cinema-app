@@ -9,7 +9,7 @@ function MovieCard({ movie }) {
 
   const poster = movie.poster_path
     ? `${IMAGE_URL}${movie.poster_path}`
-    : "https://via.placeholder.com/500x750";
+    : null;
 
 
 
@@ -40,15 +40,32 @@ function MovieCard({ movie }) {
 
       <Link to={`/movie/${movie.id}`}>
 
+        {poster ? (
         <img
-          src={poster}
-          alt={movie.title}
-          className="
-          h-[350px]
-          w-full
-          object-cover
-          "
+            src={poster}
+            alt={movie.title}
+            className="
+            h-[350px]
+            w-full
+            object-cover
+            "
         />
+        ) : (
+        <div
+            className="
+            flex
+            h-[350px]
+            w-full
+            items-center
+            justify-center
+            bg-zinc-800
+            text-center
+            text-gray-500
+            "
+        >
+            No Poster
+        </div>
+        )}
 
       </Link>
 
