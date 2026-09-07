@@ -6,6 +6,7 @@ import useMovieDetail from "../hooks/useMovieDetail";
 import DetailHero from "../components/movie/DetailHero";
 import CastRow from "../components/movie/CastRow";
 import MovieRow from "../components/movie/MovieRow";
+import TrailerModal from "../components/movie/TrailerModal";
 
 import { fetchFromTMDB } from "../services/tmdb";
 
@@ -23,6 +24,9 @@ function MovieDetail() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loadingExtras, setLoadingExtras] = useState(true);
 
+  const [trailerKey, setTrailerKey] = useState(null);
+  const [trailerOpen, setTrailerOpen] = useState(false);
+
 
   useEffect(() => {
     if (!id) return;
@@ -33,30 +37,34 @@ function MovieDetail() {
       try {
         setLoadingExtras(true);
 
-        const [credits, similar] =
-          await Promise.all([
-            fetchFromTMDB(
-              `/movie/${id}/credits`,
-              {
-                signal: controller.signal,
-              }
-            ),
+        const [credits, similar, videos] =
+        await Promise.all([
+            fetchFromTMDB(`/movie/${id}/credits`, {
+            signal: controller.signal,
+            }),
 
-            fetchFromTMDB(
-              `/movie/${id}/similar`,
-              {
-                signal: controller.signal,
-              }
-            ),
-          ]);
+            fetchFromTMDB(`/movie/${id}/similar`, {
+            signal: controller.signal,
+            }),
+
+            fetchFromTMDB(`/movie/${id}/videos`, {
+            signal: controller.signal,
+            }),
+        ]);
 
         setCast(
           credits.cast?.slice(0, 10) || []
         );
 
-        setSimilarMovies(
-          similar.results || []
+        setSimilarMovies(similar.results || []);
+
+        const trailer = videos.results?.find(
+        (video) =>
+            video.site === "YouTube" &&
+            video.type === "Trailer"
         );
+
+        setTrailerKey(trailer?.key || null);
 
       } catch (error) {
         if (error.name !== "AbortError") {
@@ -119,8 +127,9 @@ function MovieDetail() {
       <DetailHero
         movie={movie}
         onTrailerClick={() =>
-          console.log("Trailer clicked")
+          setTrailerOpen(true)
         }
+        hasTrailer={Boolean(trailerKey)}
       />
 
 
@@ -154,6 +163,13 @@ function MovieDetail() {
         />
 
       </section>
+
+      {trailerOpen && (
+            <TrailerModal
+                videoKey={trailerKey}
+                onClose={() => setTrailerOpen(false)}
+            />
+        )}
 
     </div>
   );

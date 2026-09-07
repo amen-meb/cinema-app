@@ -6,7 +6,7 @@ const IMAGE_URL =
 const POSTER_URL =
   "https://image.tmdb.org/t/p/w500";
 
-function DetailHero({ movie, onTrailerClick }) {
+function DetailHero({ movie, onTrailerClick, hasTrailer, }) {
   const backdrop = movie.backdrop_path
     ? `${IMAGE_URL}${movie.backdrop_path}`
     : null;
@@ -173,17 +173,23 @@ function DetailHero({ movie, onTrailerClick }) {
           <div className="mt-8 flex flex-wrap gap-4">
             <button
               onClick={onTrailerClick}
+              disabled={!hasTrailer}
               className="
-                rounded-lg
-                bg-red-600
-                px-6
-                py-3
-                font-semibold
-                transition
-                hover:bg-red-700
-              "
-            >
-              ▶ Watch Trailer
+                    rounded-lg
+                    bg-red-600
+                    px-6
+                    py-3
+                    font-semibold
+                    transition
+                    hover:bg-red-700
+                    disabled:cursor-not-allowed
+                    disabled:bg-zinc-700
+                    disabled:text-gray-500
+                "
+                >
+              {hasTrailer
+                    ? "▶ Watch Trailer"
+                    : "Trailer Unavailable"}
             </button>
 
             <Link

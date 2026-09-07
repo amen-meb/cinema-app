@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import useWatchlist from "../../hooks/useWatchlist";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -11,7 +12,8 @@ function MovieCard({ movie }) {
     ? `${IMAGE_URL}${movie.poster_path}`
     : null;
 
-
+  const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
+  const saved = isInWatchlist(movie.id);
 
   const year = movie.release_date
     ? movie.release_date.split("-")[0]
@@ -169,6 +171,39 @@ function MovieCard({ movie }) {
         ⭐ {movie.vote_average?.toFixed(1)}
 
       </div>
+
+      <button
+            onClick={() => {
+                if (saved) {
+                removeFromWatchlist(movie.id);
+                } else {
+                addToWatchlist(movie);
+                }
+            }}
+            className="
+                absolute
+                left-3
+                top-3
+                z-10
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-black/70
+                text-xl
+                transition
+                hover:scale-110
+            "
+            aria-label={
+                saved
+                ? "Remove from watchlist"
+                : "Add to watchlist"
+            }
+            >
+            {saved ? "♥" : "♡"}
+      </button>
 
 
 
