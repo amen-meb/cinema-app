@@ -1,25 +1,24 @@
 import { Link } from "react-router-dom";
 
-const IMAGE_URL =
-  "https://image.tmdb.org/t/p/original";
+const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 
-const POSTER_URL =
-  "https://image.tmdb.org/t/p/w500";
+const POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
-function DetailHero({ movie, onTrailerClick, hasTrailer, mediaType = "movie" }) {
+function DetailHero({
+  movie,
+  onTrailerClick,
+  hasTrailer,
+  mediaType = "movie",
+}) {
   const backdrop = movie.backdrop_path
     ? `${IMAGE_URL}${movie.backdrop_path}`
     : null;
 
-  const poster = movie.poster_path
-    ? `${POSTER_URL}${movie.poster_path}`
-    : null;
+  const poster = movie.poster_path ? `${POSTER_URL}${movie.poster_path}` : null;
 
   const title = movie.title || movie.name;
   const date = movie.release_date || movie.first_air_date;
-  const year = date
-    ? date.split("-")[0]
-    : "N/A";
+  const year = date ? date.split("-")[0] : "N/A";
 
   return (
     <section className="relative overflow-hidden rounded-2xl">
@@ -130,9 +129,7 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, mediaType = "movie" }) 
           >
             <span>{year}</span>
 
-            <span>
-              ⭐ {movie.vote_average?.toFixed(1)}
-            </span>
+            <span>⭐ {movie.vote_average?.toFixed(1)}</span>
 
             <span>
               {movie.runtime
@@ -190,10 +187,8 @@ function DetailHero({ movie, onTrailerClick, hasTrailer, mediaType = "movie" }) 
                     disabled:bg-zinc-700
                     disabled:text-gray-500
                 "
-                >
-              {hasTrailer
-                    ? "▶ Watch Trailer"
-                    : "Trailer Unavailable"}
+            >
+              {hasTrailer ? "▶ Watch Trailer" : "Trailer Unavailable"}
             </button>
 
             <Link

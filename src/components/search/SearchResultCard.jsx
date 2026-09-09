@@ -3,19 +3,14 @@ import { Link } from "react-router-dom";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w300";
 
 function SearchResultCard({ result }) {
-  const imagePath =
-    result.poster_path || result.profile_path;
+  const imagePath = result.poster_path || result.profile_path;
 
-  const image = imagePath
-    ? `${IMAGE_URL}${imagePath}`
-    : null;
+  const image = imagePath ? `${IMAGE_URL}${imagePath}` : null;
 
   const isPerson = result.media_type === "person";
   const isTV = result.media_type === "tv";
 
-  const title = isPerson
-    ? result.name
-    : result.title || result.name;
+  const title = isPerson ? result.name : result.title || result.name;
 
   const subtitle = isPerson
     ? result.known_for_department || "Person"
@@ -73,17 +68,12 @@ function SearchResultCard({ result }) {
       )}
 
       <div className="p-4">
-        <h3 className="truncate font-semibold text-white">
-          {title}
-        </h3>
+        <h3 className="truncate font-semibold text-white">{title}</h3>
 
-        <p className="mt-1 text-sm text-gray-400">
-          {subtitle}
-        </p>
+        <p className="mt-1 text-sm text-gray-400">{subtitle}</p>
       </div>
     </Link>
   );
 }
 
 export default SearchResultCard;
-

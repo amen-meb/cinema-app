@@ -16,66 +16,50 @@ import NotFound from "./pages/NotFound";
 import Toast from "./components/ui/Toast";
 import useToast from "./hooks/useToast";
 
+function App() {
+  const { toast } = useToast();
 
-function App(){
-
-const { toast } = useToast();
-
-return (
-
-<div
-className="
+  return (
+    <div
+      className="
 min-h-screen
-bg-zinc-950
-text-white
+bg-slate-100
+text-slate-900
+dark:bg-cinema-950
+dark:text-white
 "
->
+    >
+      <Navbar />
 
+      <main className="pt-24 px-5">
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-<Navbar/>
+          <Route path="/movies" element={<Browse />} />
 
+          <Route path="/series" element={<Series />} />
 
-<main className="pt-24 px-5">
+          <Route path="/movie/:id" element={<MovieDetail />} />
 
+          <Route path="/series/:id" element={<SeriesDetail />} />
 
-  <Routes>
+          <Route path="/celebrities" element={<Celebrities />} />
 
+          <Route path="/celebrity/:id" element={<CelebrityDetail />} />
 
-    <Route path="/" element={<Home/>}/>
+          <Route path="/search" element={<SearchResults />} />
 
-    <Route path="/movies" element={<Browse/>}/>
+          <Route path="/watchlist" element={<Watchlist />} />
 
-    <Route path="/series" element={<Series/>}/>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
 
-    <Route path="/movie/:id" element={<MovieDetail/>}/>
+      <Footer />
 
-    <Route path="/series/:id" element={<SeriesDetail/>}/>
-
-    <Route path="/celebrities" element={<Celebrities/>}/>
-
-    <Route path="/celebrity/:id" element={<CelebrityDetail/>}/>
-
-    <Route path="/search" element={<SearchResults/>}/>
-
-    <Route path="/watchlist" element={<Watchlist/>}/>
-
-    <Route path="*" element={<NotFound/>}/>
-
-
-  </Routes>
-
-
-</main>
-
-<Footer />
-
-<Toast message={toast}/>
-
-</div>
-
-);
-
+      <Toast message={toast} />
+    </div>
+  );
 }
-
 
 export default App;

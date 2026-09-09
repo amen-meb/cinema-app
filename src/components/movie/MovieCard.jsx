@@ -2,35 +2,29 @@ import { Link } from "react-router-dom";
 
 import useWatchlist from "../../hooks/useWatchlist";
 import useToast from "../../hooks/useToast";
+import { Bookmark, BookmarkCheck, Star } from "lucide-react";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-
 function MovieCard({ movie, mediaType = "movie" }) {
-
-
-  const poster = movie.poster_path
-    ? `${IMAGE_URL}${movie.poster_path}`
-    : null;
+  const poster = movie.poster_path ? `${IMAGE_URL}${movie.poster_path}` : null;
 
   const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
   const saved = isInWatchlist(movie.id);
 
   const { showToast } = useToast();
 
-  const resolvedMediaType = mediaType === "auto"
-    ? (movie.media_type === "tv" || movie.first_air_date ? "tv" : "movie")
-    : mediaType;
+  const resolvedMediaType =
+    mediaType === "auto"
+      ? movie.media_type === "tv" || movie.first_air_date
+        ? "tv"
+        : "movie"
+      : mediaType;
   const title = movie.title || movie.name;
   const date = movie.release_date || movie.first_air_date;
-  const year = date
-    ? date.split("-")[0]
-    : "N/A";
-
-
+  const year = date ? date.split("-")[0] : "N/A";
 
   return (
-
     <div
       className="
       group
@@ -44,14 +38,13 @@ function MovieCard({ movie, mediaType = "movie" }) {
       hover:scale-105
       "
     >
-
-
       {/* Movie Poster */}
 
-      <Link to={`/${resolvedMediaType === "tv" ? "series" : "movie"}/${movie.id}`}>
-
+      <Link
+        to={`/${resolvedMediaType === "tv" ? "series" : "movie"}/${movie.id}`}
+      >
         {poster ? (
-        <img
+          <img
             src={poster}
             alt={title}
             className="
@@ -59,9 +52,9 @@ function MovieCard({ movie, mediaType = "movie" }) {
             w-full
             object-cover
             "
-        />
+          />
         ) : (
-        <div
+          <div
             className="
             flex
             h-[350px]
@@ -72,14 +65,11 @@ function MovieCard({ movie, mediaType = "movie" }) {
             text-center
             text-gray-500
             "
-        >
+          >
             No Poster
-        </div>
+          </div>
         )}
-
       </Link>
-
-
 
       {/* Hover Overlay */}
 
@@ -97,15 +87,11 @@ function MovieCard({ movie, mediaType = "movie" }) {
         group-hover:opacity-100
         "
       >
-
-
         <div
           className="
           p-4
           "
         >
-
-
           <h3
             className="
             text-lg
@@ -115,8 +101,6 @@ function MovieCard({ movie, mediaType = "movie" }) {
           >
             {title}
           </h3>
-
-
 
           <p
             className="
@@ -128,8 +112,6 @@ function MovieCard({ movie, mediaType = "movie" }) {
           >
             {movie.overview}
           </p>
-
-
 
           <Link
             to={`/${resolvedMediaType === "tv" ? "series" : "movie"}/${movie.id}`}
@@ -145,19 +127,10 @@ function MovieCard({ movie, mediaType = "movie" }) {
             hover:bg-red-700
             "
           >
-
             Details
-
           </Link>
-
-
         </div>
-
-
       </div>
-
-
-
 
       {/* Rating Badge */}
 
@@ -175,22 +148,21 @@ function MovieCard({ movie, mediaType = "movie" }) {
         text-yellow-400
         "
       >
-
-        ⭐ {movie.vote_average?.toFixed(1)}
-
+        <Star size={14} fill="currentColor" />
+        {movie.vote_average?.toFixed(1) || "N/A"}
       </div>
 
       <button
-            onClick={() => {
-                if (saved) {
-                removeFromWatchlist(movie.id);
-                showToast(`${title} removed from watchlist`);
-                } else {
-                addToWatchlist(movie);
-                showToast(`${title} added to watchlist`);
-                }
-            }}
-            className="
+        onClick={() => {
+          if (saved) {
+            removeFromWatchlist(movie.id);
+            showToast(`${title} removed from watchlist`);
+          } else {
+            addToWatchlist(movie);
+            showToast(`${title} added to watchlist`);
+          }
+        }}
+        className="
                 absolute
                 left-3
                 top-3
@@ -206,17 +178,10 @@ function MovieCard({ movie, mediaType = "movie" }) {
                 transition
                 hover:scale-110
             "
-            aria-label={
-                saved
-                ? "Remove from watchlist"
-                : "Add to watchlist"
-            }
-            >
-            {saved ? "♥" : "♡"}
+        aria-label={saved ? "Remove from watchlist" : "Add to watchlist"}
+      >
+        {saved ? <BookmarkCheck size={18} /> : <Bookmark size={18} />}
       </button>
-
-
-
 
       {/* Bottom Info */}
 
@@ -225,7 +190,6 @@ function MovieCard({ movie, mediaType = "movie" }) {
         p-3
         "
       >
-
         <h3
           className="
           truncate
@@ -233,11 +197,8 @@ function MovieCard({ movie, mediaType = "movie" }) {
           text-white
           "
         >
-
           {title}
-
         </h3>
-
 
         <p
           className="
@@ -245,19 +206,28 @@ function MovieCard({ movie, mediaType = "movie" }) {
           text-gray-400
           "
         >
-
           {year}
-
         </p>
 
-
+        <div
+          className="mt-2 flex items-center gap-1 text-xs text-yellow-400"
+          aria-label={`${movie.vote_average?.toFixed(1) || "No"} out of 10 rating`}
+        >
+          {Array.from({ length: 5 }, (_, index) => (
+            <Star
+              key={index}
+              size={12}
+              fill={
+                index < Math.round((movie.vote_average || 0) / 2)
+                  ? "currentColor"
+                  : "none"
+              }
+            />
+          ))}
+        </div>
       </div>
-
-
     </div>
-
   );
 }
-
 
 export default MovieCard;

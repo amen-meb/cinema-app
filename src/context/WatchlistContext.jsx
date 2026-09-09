@@ -1,8 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const WatchlistContext = createContext();
 
@@ -14,21 +10,21 @@ function reducer(state, action) {
   switch (action.type) {
     case "ADD_MOVIE":
       const alreadyExists = state.watchlist.some(
-        (movie) => movie.id === action.payload.id
+        (movie) => movie.id === action.payload.id,
       );
       if (alreadyExists) {
         return state;
       }
       return {
         ...state,
-        watchlist: [ ...state.watchlist, action.payload ],
+        watchlist: [...state.watchlist, action.payload],
       };
 
     case "REMOVE_MOVIE":
       return {
         ...state,
         watchlist: state.watchlist.filter(
-          (movie) => movie.id !== action.payload
+          (movie) => movie.id !== action.payload,
         ),
       };
 
@@ -42,23 +38,18 @@ export function WatchlistProvider({ children }) {
     reducer,
     initialState,
     (initialState) => {
-      const saved = localStorage.getItem(
-        "cinema-watchlist"
-      );
+      const saved = localStorage.getItem("cinema-watchlist");
 
       return saved
         ? {
             watchlist: JSON.parse(saved),
           }
         : initialState;
-    }
+    },
   );
 
   useEffect(() => {
-    localStorage.setItem(
-      "cinema-watchlist",
-      JSON.stringify(state.watchlist)
-    );
+    localStorage.setItem("cinema-watchlist", JSON.stringify(state.watchlist));
   }, [state.watchlist]);
 
   function addToWatchlist(movie) {
@@ -76,9 +67,7 @@ export function WatchlistProvider({ children }) {
   }
 
   function isInWatchlist(id) {
-    return state.watchlist.some(
-      (movie) => movie.id === id
-    );
+    return state.watchlist.some((movie) => movie.id === id);
   }
 
   return (

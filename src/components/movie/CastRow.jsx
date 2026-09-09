@@ -1,13 +1,9 @@
-const IMAGE_URL =
-  "https://image.tmdb.org/t/p/w185";
+const IMAGE_URL = "https://image.tmdb.org/t/p/w185";
+import { Link } from "react-router-dom";
 
 function CastRow({ cast }) {
   if (!cast.length) {
-    return (
-      <p className="text-gray-400">
-        Cast information unavailable.
-      </p>
-    );
+    return <p className="text-gray-400">Cast information unavailable.</p>;
   }
 
   return (
@@ -25,7 +21,8 @@ function CastRow({ cast }) {
           : null;
 
         return (
-          <div
+          <Link
+            to={`/celebrity/${person.id}`}
             key={person.cast_id || person.id}
             className="
               min-w-[120px]
@@ -84,7 +81,7 @@ function CastRow({ cast }) {
             >
               {person.character}
             </p>
-          </div>
+          </Link>
         );
       })}
     </div>

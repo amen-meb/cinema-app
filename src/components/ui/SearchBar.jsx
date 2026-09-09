@@ -1,10 +1,7 @@
 function SearchBar({ searchTerm, onSearchChange }) {
   return (
     <div className="relative w-full">
-      <label
-        htmlFor="search"
-        className="sr-only"
-      >
+      <label htmlFor="search" className="sr-only">
         Search movies, shows, and people
       </label>
 
@@ -12,9 +9,7 @@ function SearchBar({ searchTerm, onSearchChange }) {
         type="search"
         id="search"
         value={searchTerm}
-        onChange={(event) =>
-          onSearchChange(event.target.value)
-        }
+        onChange={(event) => onSearchChange(event.target.value)}
         placeholder="Search movies, shows, people..."
         className="
           w-full

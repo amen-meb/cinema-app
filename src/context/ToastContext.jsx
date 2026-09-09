@@ -1,8 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useState,
-} from "react";
+import { createContext, useCallback, useState } from "react";
 
 const ToastContext = createContext();
 
@@ -18,9 +14,7 @@ export function ToastProvider({ children }) {
   }, []);
 
   return (
-    <ToastContext.Provider
-      value={{ toast, showToast }}
-    >
+    <ToastContext.Provider value={{ toast, showToast }}>
       {children}
     </ToastContext.Provider>
   );

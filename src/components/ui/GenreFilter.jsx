@@ -1,13 +1,7 @@
-function GenreFilter({
-  genres,
-  selectedGenre,
-  onGenreChange,
-}) {
+function GenreFilter({ genres, selectedGenre, onGenreChange }) {
   return (
     <div className="mb-8">
-      <h2 className="mb-3 text-lg font-semibold text-white">
-        Genres
-      </h2>
+      <h2 className="mb-3 text-lg font-semibold text-white">Genres</h2>
 
       <div className="flex gap-3 overflow-x-auto pb-2 md:flex-wrap">
         <button

@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+@theme {
+  --color-cinema-950: #09090b;
+  --color-cinema-900: #18181b;
+  --color-cinema-800: #27272a;
+  --color-cinema-700: #3f3f46;
+  --color-cinema-accent: #dc2626;
+  --color-cinema-accent-dark: #991b1b;
+  --color-cinema-muted: #a1a1aa;
+  --font-sans: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --radius-card: 0.75rem;
+  --shadow-cinema: 0 18px 45px rgb(0 0 0 / 0.28);
+
+  /* Existing utility names resolve through the cinema palette. */
+  --color-zinc-950: var(--color-cinema-950);
+  --color-zinc-900: var(--color-cinema-900);
+  --color-zinc-800: var(--color-cinema-800);
+  --color-zinc-700: var(--color-cinema-700);
+  --color-red-950: #450a0a;
+  --color-red-700: var(--color-cinema-accent-dark);
+  --color-red-600: var(--color-cinema-accent);
+  --color-red-500: #ef4444;
+  --color-red-400: #f87171;
+  --color-red-300: #fca5a5;
+  --color-gray-500: #71717a;
+  --color-gray-400: var(--color-cinema-muted);
+  --color-gray-300: #d4d4d8;
+  --color-yellow-400: #facc15;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] .bg-zinc-950 {
+  background-color: #f1f5f9;
+}
+
+[data-theme="light"] .bg-zinc-900 {
+  background-color: #ffffff;
+}
+
+[data-theme="light"] .bg-zinc-800 {
+  background-color: #e2e8f0;
+}
+
+[data-theme="light"] .bg-black\/40 {
+  background-color: rgb(255 255 255 / 0.8);
+}
+
+[data-theme="light"] .bg-black\/70,
+[data-theme="light"] .bg-black\/80 {
+  background-color: rgb(15 23 42 / 0.8);
+}
+
+[data-theme="light"] .text-white {
+  color: #0f172a;
+}
+
+[data-theme="light"] .text-gray-300 {
+  color: #475569;
+}
+
+[data-theme="light"] .text-gray-400 {
+  color: #64748b;
+}
+
+[data-theme="light"] .text-gray-500 {
+  color: #64748b;
+}
+
+[data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/15 {
+  border-color: #cbd5e1;
+}

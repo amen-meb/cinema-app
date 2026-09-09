@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchFromTMDB } from "../services/tmdb";
 
-export default function useMovies(endpoint) {
+export default function useMovies(endpoint, { append = false } = {}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -18,7 +19,12 @@ export default function useMovies(endpoint) {
           signal: controller.signal,
         });
 
-        setMovies(data.results || []);
+        setMovies((currentMovies) =>
+          append
+            ? [...currentMovies, ...(data.results || [])]
+            : data.results || [],
+        );
+        setTotalPages(data.total_pages || 1);
       } catch (error) {
         if (error.name !== "AbortError") {
           setError(error.message);
@@ -33,11 +39,12 @@ export default function useMovies(endpoint) {
     return () => {
       controller.abort();
     };
-  }, [endpoint]);
+  }, [append, endpoint]);
 
   return {
     movies,
     loading,
     error,
+    totalPages,
   };
 }
