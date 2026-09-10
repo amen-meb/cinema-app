@@ -41,22 +41,45 @@ function Watchlist() {
             Save movies you want to watch later and they will appear here.
           </p>
 
-          <Link
-            to="/movies"
-            className="
-              mt-6
-              rounded-lg
-              bg-red-600
-              px-6
-              py-3
-              font-semibold
-              text-white
-              transition
-              hover:bg-red-700
-            "
-          >
-            Browse Movies
-          </Link>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/movies"
+              className="
+                rounded-lg
+                border
+                border-red-600
+                px-6
+                py-3
+                font-semibold
+                text-400
+                text-600
+                transition
+                hover:bg-red-600
+                hover:text-white
+              "
+            >
+              Browse Movies
+            </Link>
+             
+
+            <Link
+              to="/series"
+              className="
+                rounded-lg
+                border
+                border-red-600
+                px-6
+                py-3
+                font-semibold
+                text-400
+                transition
+                hover:bg-red-600
+                hover:text-white
+              "
+            >
+              Browse Series
+            </Link>
+          </div>
         </div>
       ) : (
         <>

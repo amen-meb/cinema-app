@@ -77,43 +77,47 @@ space-y-12
 
       <HeroBanner movie={featuredMovie} />
 
-      {/* Trending */}
+      <div className="-mx-5">
+        <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+          {/* Trending */}
 
-      <MovieRow
-        title="Trending This Week"
-        movies={trending}
-        loading={trendingLoading}
-      />
+          <MovieRow
+            title="Trending This Week"
+            movies={trending}
+            loading={trendingLoading}
+          />
 
-      {/* Popular */}
+          {/* Popular */}
 
-      <MovieRow
-        title="Popular Movies"
-        movies={popular}
-        loading={popularLoading}
-      />
+          <MovieRow
+            title="Popular Movies"
+            movies={popular}
+            loading={popularLoading}
+          />
 
-      {/* Top Rated */}
+          {/* Top Rated */}
 
-      <MovieRow
-        title="Top Rated Movies"
-        movies={topRated}
-        loading={topRatedLoading}
-      />
+          <MovieRow
+            title="Top Rated Movies"
+            movies={topRated}
+            loading={topRatedLoading}
+          />
 
-      <MovieRow
-        title="Popular Series"
-        movies={popularSeries}
-        loading={popularSeriesLoading}
-        mediaType="tv"
-      />
+          <MovieRow
+            title="Popular Series"
+            movies={popularSeries}
+            loading={popularSeriesLoading}
+            mediaType="tv"
+          />
 
-      <MovieRow
-        title="Top Rated Series"
-        movies={topRatedSeries}
-        loading={topRatedSeriesLoading}
-        mediaType="tv"
-      />
+          <MovieRow
+            title="Top Rated Series"
+            movies={topRatedSeries}
+            loading={topRatedSeriesLoading}
+            mediaType="tv"
+          />
+        </div>
+      </div>
     </div>
   );
 }
