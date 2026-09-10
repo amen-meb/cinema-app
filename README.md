@@ -1,56 +1,85 @@
-# Cinema App
+# Cineverse
 
-## Setup
+Cineverse is a responsive movie and series discovery application powered by the [TMDB API](https://developer.themoviedb.org/docs). Browse trending titles, search across movies and shows, explore cast filmographies, watch trailers, and maintain a personal watchlist.
 
-1. Create a TMDB account and generate an API key from the [TMDB API settings](https://www.themoviedb.org/settings/api).
-2. Create a `.env` file in the project root:
+## Features
 
-```env
-VITE_TMDB_KEY=your_tmdb_api_key
-```
+- Featured home hero with backdrop imagery and gradient overlay.
+- Horizontal movie and series rows with smooth scroll controls.
+- Responsive browse grids with 2, 3, 4, and 5-column breakpoints.
+- Dynamic genre filters fetched from TMDB.
+- Rating, release year, hover details, and watchlist controls on movie cards.
+- Movie and series detail pages with overview, genres, cast, trailers, and similar titles.
+- YouTube trailer modal with backdrop-click and close-button support.
+- Debounced search for movies, television series, and people.
+- Celebrity profiles with biography and combined filmography.
+- Watchlist persistence through `localStorage`.
+- Toast feedback when titles are added to or removed from the watchlist.
+- Skeleton loading states and error handling across data-fetching views.
+- Infinite scrolling and release-year range filtering on the movie browse page.
+- Persisted dark/light theme preference.
 
-3. Restart the Vite server with `npm run dev`.
+## Technology
 
-The app cannot fetch movies until `VITE_TMDB_KEY` is set. Do not commit the `.env` file.
+- React 19
+- Vite
+- React Router
+- Tailwind CSS v4 with a custom `@theme` cinema design system
+- Lucide React icons
+- TMDB REST API
+- Oxlint
 
-### Vercel deployment
+## Getting Started
 
-In the Vercel project, open **Settings > Environment Variables**, add
-`VITE_TMDB_KEY` with your TMDB API key, select the required environments, and
-redeploy. Vite embeds `VITE_` variables during the build, so changing the
-variable requires a new deployment.
+### Prerequisites
 
-## Pages & Navigation
+- Node.js 20 or later
+- npm
+- A TMDB API key
 
-● Home page: trending, popular, and top-rated movies and series rows
+### Installation
 
-● Movies page: full movie catalogue with genre filter and sort
+1. Clone the repository and move into the project directory.
 
-● Movie Detail page: full information, trailer, cast, and similar movies
+   ```bash
+   git clone https://github.com/amen-meb/cinema-app.git
+   cd cinema-app
+   ```
 
-● Series page: full series catalogue with genre filter and sort
+2. Install dependencies.
 
-● Series Detail page: full information, trailer, cast, and similar series
+   ```bash
+   npm install
+   ```
 
-● Search page: debounced search for movies, series, and celebrities
+3. Create a `.env` file in the project root.
 
-● Celebrities page: popular celebrity catalogue
+   ```env
+   VITE_TMDB_KEY=your_tmdb_api_key
+   ```
 
-● Celebrity Detail page: biography and movies or series worked on
+4. Start the development server.
 
-● Watchlist page: saved movies with add/remove functionality using LocalStorage
+   ```bash
+   npm run dev
+   ```
 
-● 404 Not Found page
+## Available Scripts
 
-<!-- The remaining sections below are the original Vite setup notes. -->
+| Command           | Description                           |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start the Vite development server.    |
+| `npm run build`   | Create a production build in `dist/`. |
+| `npm run preview` | Preview the production build locally. |
+| `npm run lint`    | Run Oxlint against the project.       |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## Deployment on Vercel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Import the repository into Vercel.
+2. Set the framework preset to **Vite** if it is not detected automatically.
+3. Add `VITE_TMDB_KEY` under **Settings > Environment Variables** for the environments you use.
+4. Deploy or redeploy the project.
 
-## Expanding the Oxlint configuration
+Environment variable changes require a new deployment because Vite embeds them during the build.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.

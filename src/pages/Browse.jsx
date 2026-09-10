@@ -17,6 +17,7 @@ function Browse() {
   const [minYear, setMinYear] = useState("");
   const [maxYear, setMaxYear] = useState("");
   const [page, setPage] = useState(1);
+  const [genreError, setGenreError] = useState(null);
 
   const { movies, loading, error, totalPages } = useMovies(
     `/discover/movie?sort_by=popularity.desc&page=${page}`,
@@ -50,7 +51,7 @@ function Browse() {
         setGenres(data.genres || []);
       } catch (error) {
         if (error.name !== "AbortError") {
-          console.error(error);
+          setGenreError(error.message);
         }
       }
     }
@@ -125,6 +126,7 @@ function Browse() {
         selectedGenre={selectedGenre}
         onGenreChange={setSelectedGenre}
       />
+      {genreError && <p className="mb-4 text-sm text-red-300">{genreError}</p>}
 
       <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
 

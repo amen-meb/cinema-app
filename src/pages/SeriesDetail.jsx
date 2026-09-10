@@ -5,6 +5,7 @@ import DetailHero from "../components/movie/DetailHero";
 import CastRow from "../components/movie/CastRow";
 import MovieRow from "../components/movie/MovieRow";
 import TrailerModal from "../components/movie/TrailerModal";
+import SkeletonCard from "../components/movie/SkeletonCard";
 import { fetchFromTMDB } from "../services/tmdb";
 
 export default function SeriesDetail() {
@@ -14,10 +15,14 @@ export default function SeriesDetail() {
   const [similar, setSimilar] = useState([]);
   const [trailerKey, setTrailerKey] = useState(null);
   const [trailerOpen, setTrailerOpen] = useState(false);
+  const [loadingExtras, setLoadingExtras] = useState(true);
+  const [extrasError, setExtrasError] = useState(null);
 
   useEffect(() => {
     if (!id) return;
     const controller = new AbortController();
+    setLoadingExtras(true);
+    setExtrasError(null);
     Promise.all([
       fetchFromTMDB(`/tv/${id}/credits`, { signal: controller.signal }),
       fetchFromTMDB(`/tv/${id}/similar`, { signal: controller.signal }),
@@ -32,7 +37,11 @@ export default function SeriesDetail() {
         setTrailerKey(trailer?.key || null);
       })
       .catch((requestError) => {
-        if (requestError.name !== "AbortError") console.error(requestError);
+        if (requestError.name !== "AbortError")
+          setExtrasError(requestError.message);
+      })
+      .finally(() => {
+        setLoadingExtras(false);
       });
     return () => controller.abort();
   }, [id]);
@@ -64,9 +73,24 @@ export default function SeriesDetail() {
       />
       <section className="mt-12">
         <h2 className="mb-5 text-2xl font-bold">Cast</h2>
-        <CastRow cast={cast} />
+        {loadingExtras ? (
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        ) : extrasError ? (
+          <p className="text-red-300">{extrasError}</p>
+        ) : (
+          <CastRow cast={cast} />
+        )}
       </section>
-      <MovieRow title="Similar Series" movies={similar} mediaType="tv" />
+      <MovieRow
+        title="Similar Series"
+        movies={similar}
+        loading={loadingExtras}
+        mediaType="tv"
+      />
       {trailerOpen && (
         <TrailerModal
           videoKey={trailerKey}

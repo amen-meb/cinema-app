@@ -60,7 +60,9 @@ scrollbar-thin
               <div
                 key={index}
                 className="
-min-w-[200px]
+w-[200px]
+shrink-0
+sm:w-[220px]
 "
               >
                 <SkeletonCard />
@@ -70,7 +72,9 @@ min-w-[200px]
               <div
                 key={movie.id}
                 className="
-min-w-[200px]
+w-[200px]
+shrink-0
+sm:w-[220px]
 "
               >
                 <MovieCard movie={movie} mediaType={mediaType} />

@@ -7,6 +7,7 @@ import DetailHero from "../components/movie/DetailHero";
 import CastRow from "../components/movie/CastRow";
 import MovieRow from "../components/movie/MovieRow";
 import TrailerModal from "../components/movie/TrailerModal";
+import SkeletonCard from "../components/movie/SkeletonCard";
 
 import { fetchFromTMDB } from "../services/tmdb";
 
@@ -18,6 +19,7 @@ function MovieDetail() {
   const [cast, setCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loadingExtras, setLoadingExtras] = useState(true);
+  const [extrasError, setExtrasError] = useState(null);
 
   const [trailerKey, setTrailerKey] = useState(null);
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -30,6 +32,7 @@ function MovieDetail() {
     async function getExtraData() {
       try {
         setLoadingExtras(true);
+        setExtrasError(null);
 
         const [credits, similar, videos] = await Promise.all([
           fetchFromTMDB(`/movie/${id}/credits`, {
@@ -56,7 +59,7 @@ function MovieDetail() {
         setTrailerKey(trailer?.key || null);
       } catch (error) {
         if (error.name !== "AbortError") {
-          console.error(error);
+          setExtrasError(error.message);
         }
       } finally {
         setLoadingExtras(false);
@@ -110,7 +113,13 @@ function MovieDetail() {
         <h2 className="mb-5 text-2xl font-bold">Cast</h2>
 
         {loadingExtras ? (
-          <p className="animate-pulse text-gray-400">Loading cast...</p>
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        ) : extrasError ? (
+          <p className="text-red-300">{extrasError}</p>
         ) : (
           <CastRow cast={cast} />
         )}

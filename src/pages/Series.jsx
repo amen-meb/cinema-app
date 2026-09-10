@@ -10,6 +10,7 @@ export default function Series() {
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [sortOption, setSortOption] = useState("default");
+  const [genreError, setGenreError] = useState(null);
   const {
     movies: series,
     loading,
@@ -21,7 +22,8 @@ export default function Series() {
     fetchFromTMDB("/genre/tv/list", { signal: controller.signal })
       .then((data) => setGenres(data.genres || []))
       .catch((requestError) => {
-        if (requestError.name !== "AbortError") console.error(requestError);
+        if (requestError.name !== "AbortError")
+          setGenreError(requestError.message);
       });
     return () => controller.abort();
   }, []);
@@ -59,6 +61,7 @@ export default function Series() {
         selectedGenre={selectedGenre}
         onGenreChange={setSelectedGenre}
       />
+      {genreError && <p className="mb-4 text-sm text-red-300">{genreError}</p>}
       <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
       {loading && (
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">

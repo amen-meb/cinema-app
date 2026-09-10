@@ -48,7 +48,7 @@ function MovieCard({ movie, mediaType = "movie" }) {
             src={poster}
             alt={title}
             className="
-            h-[350px]
+            aspect-[2/3]
             w-full
             object-cover
             "
@@ -57,7 +57,7 @@ function MovieCard({ movie, mediaType = "movie" }) {
           <div
             className="
             flex
-            h-[350px]
+            aspect-[2/3]
             w-full
             items-center
             justify-center

@@ -10,16 +10,29 @@ function Home() {
     error: trendingError,
   } = useMovies("/trending/movie/week");
 
-  const { movies: popular, error: popularError } = useMovies("/movie/popular");
+  const {
+    movies: popular,
+    loading: popularLoading,
+    error: popularError,
+  } = useMovies("/movie/popular");
 
-  const { movies: topRated, error: topRatedError } =
-    useMovies("/movie/top_rated");
+  const {
+    movies: topRated,
+    loading: topRatedLoading,
+    error: topRatedError,
+  } = useMovies("/movie/top_rated");
 
-  const { movies: popularSeries, error: popularSeriesError } =
-    useMovies("/tv/popular");
+  const {
+    movies: popularSeries,
+    loading: popularSeriesLoading,
+    error: popularSeriesError,
+  } = useMovies("/tv/popular");
 
-  const { movies: topRatedSeries, error: topRatedSeriesError } =
-    useMovies("/tv/top_rated");
+  const {
+    movies: topRatedSeries,
+    loading: topRatedSeriesLoading,
+    error: topRatedSeriesError,
+  } = useMovies("/tv/top_rated");
 
   if (trendingLoading) {
     return (
@@ -74,17 +87,31 @@ space-y-12
 
       {/* Popular */}
 
-      <MovieRow title="Popular Movies" movies={popular} />
+      <MovieRow
+        title="Popular Movies"
+        movies={popular}
+        loading={popularLoading}
+      />
 
       {/* Top Rated */}
 
-      <MovieRow title="Top Rated Movies" movies={topRated} />
+      <MovieRow
+        title="Top Rated Movies"
+        movies={topRated}
+        loading={topRatedLoading}
+      />
 
-      <MovieRow title="Popular Series" movies={popularSeries} mediaType="tv" />
+      <MovieRow
+        title="Popular Series"
+        movies={popularSeries}
+        loading={popularSeriesLoading}
+        mediaType="tv"
+      />
 
       <MovieRow
         title="Top Rated Series"
         movies={topRatedSeries}
+        loading={topRatedSeriesLoading}
         mediaType="tv"
       />
     </div>

@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import useDebounce from "../hooks/useDebounce";
 
 import SearchBar from "../components/ui/SearchBar";
 import SearchResultCard from "../components/search/SearchResultCard";
+import SkeletonCard from "../components/movie/SkeletonCard";
 
 import { fetchFromTMDB } from "../services/tmdb";
 
 function SearchResults() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(
+    () => searchParams.get("query") || "",
+  );
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -80,8 +85,10 @@ function SearchResults() {
       {/* Loading */}
 
       {loading && (
-        <div className="py-12 text-center">
-          <p className="animate-pulse text-gray-400">Searching...</p>
+        <div className="grid grid-cols-2 gap-5 py-12 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
         </div>
       )}
 
