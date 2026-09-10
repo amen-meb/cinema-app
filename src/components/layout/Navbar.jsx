@@ -36,10 +36,6 @@ function Navbar() {
       name: "Celebrities",
       path: "/celebrities",
     },
-    {
-      name: "Search",
-      path: "/search",
-    },
   ];
 
   return (
@@ -60,7 +56,7 @@ function Navbar() {
         className="
           mx-auto
           flex
-          max-w-7xl
+          max-w-screen-2xl
           items-center
           justify-between
           px-4
@@ -224,6 +220,29 @@ function Navbar() {
             </span>
           </NavLink>
 
+          <form onSubmit={handleSearch} className="w-full md:w-64">
+            <label htmlFor="navbar-search" className="sr-only">
+              Search for movies and shows
+            </label>
+            <div className="relative">
+              <input
+                id="navbar-search"
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search for a movie or shows"
+                className="h-10 w-full rounded-full bg-zinc-800 px-5 pr-12 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-1 focus:ring-red-500"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-300 hover:text-white"
+                aria-label="Search"
+              >
+                <Search size={18} />
+              </button>
+            </div>
+          </form>
+
           {/* Mobile Theme Button */}
           <button
             type="button"
@@ -255,28 +274,6 @@ function Navbar() {
           </button>
         </div>
 
-        <form onSubmit={handleSearch} className="hidden w-full max-w-xs md:block">
-          <label htmlFor="navbar-search" className="sr-only">
-            Search for movies and shows
-          </label>
-          <div className="relative">
-            <input
-              id="navbar-search"
-              type="search"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="Search for a movie or shows"
-              className="h-10 w-full rounded-full bg-zinc-800 px-5 pr-12 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-1 focus:ring-red-500"
-            />
-            <button
-              type="submit"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-300 hover:text-white"
-              aria-label="Search"
-            >
-              <Search size={18} />
-            </button>
-          </div>
-        </form>
       </div>
     </nav>
   );
