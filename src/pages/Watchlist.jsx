@@ -8,7 +8,7 @@ function Watchlist() {
   const { watchlist } = useWatchlist();
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
       {/* Page Header */}
 
       <header className="mb-8">

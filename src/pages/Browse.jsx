@@ -114,7 +114,7 @@ function Browse() {
   }, [movies, selectedGenre, sortOption, minYear, maxYear]);
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold">Browse Movies</h1>
 

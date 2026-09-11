@@ -45,7 +45,7 @@ export default function Celebrities() {
   }, [people, department, sortOption]);
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold">Celebrities</h1>
         <p className="mt-2 text-gray-400">
