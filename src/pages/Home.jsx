@@ -65,7 +65,13 @@ function Home() {
     );
   }
 
-  const featuredMovie = trending[0];
+  const featuredMovies = [
+    ...trending.slice(0, 3),
+    ...popularSeries.slice(0, 2).map((series) => ({
+      ...series,
+      media_type: "tv",
+    })),
+  ];
 
   return (
     <div
@@ -75,7 +81,7 @@ space-y-12
     >
       {/* Hero */}
 
-      <HeroBanner movie={featuredMovie} />
+      <HeroBanner movies={featuredMovies} />
 
       <div className="-mx-5">
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">

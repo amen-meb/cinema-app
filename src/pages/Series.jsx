@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import useMovies from "../hooks/useMovies";
 import MovieGrid from "../components/movie/MovieGrid";
 import SkeletonCard from "../components/movie/SkeletonCard";
-import GenreFilter from "../components/ui/GenreFilter";
+import Sidebar from "../components/ui/Sidebar";
 import SortSelect from "../components/ui/SortSelect";
 import { fetchFromTMDB } from "../services/tmdb";
 
@@ -31,7 +31,10 @@ export default function Series() {
   const filteredSeries = useMemo(() => {
     const result = series.filter(
       (show) =>
-        selectedGenre === null || show.genre_ids?.includes(selectedGenre),
+        selectedGenre === null ||
+        show.genre_ids?.some(
+          (genreId) => String(genreId) === String(selectedGenre),
+        ),
     );
     return [...result].sort((a, b) => {
       if (sortOption === "rating-desc") return b.vote_average - a.vote_average;
@@ -56,28 +59,35 @@ export default function Series() {
           Browse the full TV series catalogue.
         </p>
       </header>
-      <GenreFilter
-        genres={genres}
-        selectedGenre={selectedGenre}
-        onGenreChange={setSelectedGenre}
-      />
-      {genreError && <p className="mb-4 text-sm text-red-300">{genreError}</p>}
-      <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
-      {loading && (
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
+      <div className="grid items-start gap-8 lg:h-[calc(100vh-12rem)] lg:min-h-0 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <div className="lg:h-full lg:overflow-y-auto lg:pr-2">
+          <Sidebar
+            genres={genres}
+            selectedGenre={selectedGenre}
+            onGenreChange={setSelectedGenre}
+          />
+          {genreError && <p className="mt-3 text-sm text-red-300">{genreError}</p>}
         </div>
-      )}
-      {error && (
-        <div className="rounded-lg bg-red-950 p-6 text-center text-red-300">
-          {error}
-        </div>
-      )}
-      {!loading && !error && (
-        <MovieGrid movies={filteredSeries} mediaType="tv" />
-      )}
+
+        <section className="lg:h-full lg:overflow-y-auto lg:pr-2">
+          <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
+          {loading && (
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
+            </div>
+          )}
+          {error && (
+            <div className="rounded-lg bg-red-950 p-6 text-center text-red-300">
+              {error}
+            </div>
+          )}
+          {!loading && !error && (
+            <MovieGrid movies={filteredSeries} mediaType="tv" />
+          )}
+        </section>
+      </div>
     </div>
   );
 }

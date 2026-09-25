@@ -47,9 +47,11 @@ function Navbar() {
         right-0
         z-50
         border-b
-        border-white/10
-        bg-black/40
+        border-slate-200
+        bg-white/90
         backdrop-blur-md
+        dark:border-white/10
+        dark:bg-black/40
       "
     >
       <div
@@ -72,7 +74,8 @@ function Navbar() {
             shrink-0
             text-2xl
             font-bold
-            text-white
+            text-slate-900
+            dark:text-white
             transition
             hover:text-red-400
           "
@@ -92,12 +95,14 @@ function Navbar() {
             justify-center
             rounded-full
             border
-            border-white/15
-            text-white
+            border-slate-300
+            text-slate-700
             transition
             hover:border-red-500
             hover:text-red-500
-            md:flex
+            dark:border-white/15
+            dark:text-white
+            lg:flex
           "
           aria-label={`Switch to ${
             theme === "dark" ? "light" : "dark"
@@ -117,9 +122,11 @@ function Navbar() {
             justify-center
             rounded-full
             border
-            border-white/15
-            text-white
-            md:hidden
+            border-slate-300
+            text-slate-700
+            dark:border-white/15
+            dark:text-white
+            lg:hidden
           "
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={
@@ -140,20 +147,23 @@ function Navbar() {
             flex-col
             gap-6
             border-b
-            border-white/10
-            bg-zinc-950/95
+            border-slate-200
+            bg-white/95
             px-5
             py-5
             ${menuOpen ? "flex" : "hidden"}
 
-            md:static
-            md:flex
-            md:flex-row
-            md:items-center
-            md:gap-7
-            md:border-0
-            md:bg-transparent
-            md:p-0
+            lg:static
+            lg:flex
+            lg:flex-row
+            lg:items-center
+            lg:gap-7
+            lg:border-0
+            lg:bg-transparent
+            lg:p-0
+            dark:border-white/10
+            dark:bg-zinc-950/95
+            md:dark:bg-transparent
           `}
         >
           {links.map((link) => (
@@ -169,7 +179,7 @@ function Navbar() {
                   ${
                     isActive
                       ? "text-red-500"
-                      : "text-white"
+                      : "text-slate-700 dark:text-white"
                   }
                   hover:text-red-400
                 `
@@ -191,7 +201,7 @@ function Navbar() {
                 ${
                   isActive
                     ? "text-red-500"
-                    : "text-white"
+                    : "text-slate-700 dark:text-white"
                 }
                 hover:text-red-400
               `
@@ -220,7 +230,7 @@ function Navbar() {
             </span>
           </NavLink>
 
-          <form onSubmit={handleSearch} className="w-full md:w-64">
+          <form onSubmit={handleSearch} className="w-full lg:w-64">
             <label htmlFor="navbar-search" className="sr-only">
               Search for movies and shows
             </label>
@@ -231,11 +241,11 @@ function Navbar() {
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search for a movie or shows"
-                className="h-10 w-full rounded-full bg-zinc-800 px-5 pr-12 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-1 focus:ring-red-500"
+                className="h-10 w-full rounded-full bg-slate-100 px-5 pr-12 text-sm text-slate-900 outline-none placeholder:text-gray-500 focus:ring-1 focus:ring-red-500 dark:bg-zinc-800 dark:text-white"
               />
               <button
                 type="submit"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-300 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-600 hover:text-slate-900 dark:text-sky-300 dark:hover:text-white"
                 aria-label="Search"
               >
                 <Search size={18} />
@@ -255,12 +265,14 @@ function Navbar() {
               justify-center
               rounded-full
               border
-              border-white/15
-              text-white
+              border-slate-300
+              text-slate-700
               transition
               hover:border-red-500
               hover:text-red-500
-              md:hidden
+              dark:border-white/15
+              dark:text-white
+              lg:hidden
             "
             aria-label={`Switch to ${
               theme === "dark" ? "light" : "dark"

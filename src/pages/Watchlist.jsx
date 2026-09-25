@@ -28,7 +28,8 @@ function Watchlist() {
             items-center
             justify-center
             rounded-2xl
-            bg-zinc-900
+            bg-white
+            dark:bg-zinc-900
             px-6
             text-center
           "
@@ -37,7 +38,7 @@ function Watchlist() {
 
           <h2 className="mt-5 text-2xl font-bold">Your watchlist is empty</h2>
 
-          <p className="mt-2 max-w-md text-gray-400">
+          <p className="mt-2 max-w-md text-gray-500 dark:text-gray-400">
             Save movies you want to watch later and they will appear here.
           </p>
 
@@ -51,8 +52,7 @@ function Watchlist() {
                 px-6
                 py-3
                 font-semibold
-                text-400
-                text-600
+                text-red-600
                 transition
                 hover:bg-red-600
                 hover:text-white
@@ -72,6 +72,7 @@ function Watchlist() {
                 py-3
                 font-semibold
                 text-400
+                text-red-600
                 transition
                 hover:bg-red-600
                 hover:text-white

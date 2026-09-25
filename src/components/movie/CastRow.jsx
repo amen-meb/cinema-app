@@ -51,7 +51,8 @@ function CastRow({ cast }) {
                   items-center
                   justify-center
                   rounded-lg
-                  bg-zinc-800
+                  bg-slate-200
+                  dark:bg-zinc-800
                   text-xs
                   text-gray-500
                 "

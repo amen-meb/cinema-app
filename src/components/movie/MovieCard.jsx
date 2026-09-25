@@ -31,7 +31,8 @@ function MovieCard({ movie, mediaType = "movie" }) {
       relative
       overflow-hidden
       rounded-xl
-      bg-zinc-900
+      bg-white
+      dark:bg-zinc-900
       shadow-lg
       transition
       duration-300
@@ -61,7 +62,8 @@ function MovieCard({ movie, mediaType = "movie" }) {
             w-full
             items-center
             justify-center
-            bg-zinc-800
+            bg-slate-200
+            dark:bg-zinc-800
             text-center
             text-gray-500
             "
@@ -139,6 +141,11 @@ function MovieCard({ movie, mediaType = "movie" }) {
         absolute
         top-3
         right-3
+        flex
+        w-fit
+        items-center
+        gap-1
+        whitespace-nowrap
         rounded-lg
         bg-black/80
         px-3
@@ -173,10 +180,16 @@ function MovieCard({ movie, mediaType = "movie" }) {
                 items-center
                 justify-center
                 rounded-full
-                bg-black/70
+                border
+                border-slate-200
+                bg-white/90
+                text-slate-700
                 text-xl
                 transition
                 hover:scale-110
+                dark:border-transparent
+                dark:bg-black/70
+                dark:text-white
             "
         aria-label={saved ? "Remove from watchlist" : "Add to watchlist"}
       >
@@ -194,7 +207,8 @@ function MovieCard({ movie, mediaType = "movie" }) {
           className="
           truncate
           font-semibold
-          text-white
+          text-slate-900
+          dark:text-white
           "
         >
           {title}
@@ -203,7 +217,8 @@ function MovieCard({ movie, mediaType = "movie" }) {
         <p
           className="
           text-sm
-          text-gray-400
+          text-gray-500
+          dark:text-gray-400
           "
         >
           {year}

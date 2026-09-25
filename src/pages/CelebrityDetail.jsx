@@ -35,7 +35,7 @@ export default function CelebrityDetail() {
 
   if (error)
     return (
-      <div className="rounded-xl bg-red-950 p-8 text-center text-red-300">
+      <div className="rounded-xl bg-red-50 p-8 text-center text-red-700 dark:bg-red-950 dark:text-red-300">
         {error}
       </div>
     );
@@ -48,7 +48,7 @@ export default function CelebrityDetail() {
 
   return (
     <div className="mx-auto max-w-7xl">
-      <section className="flex flex-col gap-8 rounded-2xl bg-zinc-900 p-6 md:flex-row md:p-10">
+      <section className="flex flex-col gap-8 rounded-2xl bg-white p-6 shadow-sm dark:bg-zinc-900 md:flex-row md:p-10">
         {person.profile_path ? (
           <img
             src={`${IMAGE_URL}${person.profile_path}`}
@@ -56,7 +56,7 @@ export default function CelebrityDetail() {
             className="w-full max-w-xs rounded-xl object-cover"
           />
         ) : (
-          <div className="flex aspect-[2/3] w-full max-w-xs items-center justify-center rounded-xl bg-zinc-800 text-gray-500">
+          <div className="flex aspect-[2/3] w-full max-w-xs items-center justify-center rounded-xl bg-slate-200 text-gray-500 dark:bg-zinc-800">
             No Image
           </div>
         )}
@@ -65,10 +65,10 @@ export default function CelebrityDetail() {
             {person.known_for_department || "Celebrity"}
           </p>
           <h1 className="mt-2 text-4xl font-bold md:text-6xl">{person.name}</h1>
-          <p className="mt-6 max-w-3xl leading-7 text-gray-300">
+          <p className="mt-6 max-w-3xl leading-7 text-gray-700 dark:text-gray-300">
             {person.biography || "Biography unavailable."}
           </p>
-          <p className="mt-5 text-gray-400">
+          <p className="mt-5 text-gray-500 dark:text-gray-400">
             Born {person.birthday || "Unknown"}
             {person.place_of_birth ? ` in ${person.place_of_birth}` : ""}
           </p>

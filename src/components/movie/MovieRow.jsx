@@ -28,7 +28,7 @@ mb-10
             <button
               type="button"
               onClick={() => scrollRow(-1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-red-500 hover:bg-red-600"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-slate-700 transition hover:border-red-500 hover:bg-red-600 hover:text-white dark:border-white/15 dark:bg-white/5 dark:text-white"
               aria-label={`Scroll ${title} left`}
             >
               <ChevronLeft size={18} />
@@ -36,7 +36,7 @@ mb-10
             <button
               type="button"
               onClick={() => scrollRow(1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-red-500 hover:bg-red-600"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-slate-700 transition hover:border-red-500 hover:bg-red-600 hover:text-white dark:border-white/15 dark:bg-white/5 dark:text-white"
               aria-label={`Scroll ${title} right`}
             >
               <ChevronRight size={18} />

@@ -1,7 +1,7 @@
 function SortSelect({ sortOption, onSortChange, options }) {
   return (
     <div className="mb-8 flex items-center gap-3">
-      <label htmlFor="sort" className="text-sm font-semibold text-white">
+      <label htmlFor="sort" className="text-sm font-semibold text-slate-900 dark:text-white">
         Sort:
       </label>
 
@@ -13,11 +13,13 @@ function SortSelect({ sortOption, onSortChange, options }) {
           rounded-lg
           border
           border-zinc-700
-          bg-zinc-900
+          bg-white
+          dark:bg-zinc-900
           px-4
           py-2
           text-sm
-          text-white
+          text-slate-900
+          dark:text-white
           outline-none
           focus:border-red-500
         "

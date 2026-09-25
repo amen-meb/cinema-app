@@ -13,12 +13,14 @@ function Toast({ message }) {
         -translate-x-1/2
         animate-[fadeIn_0.2s_ease-out]
         rounded-lg
-        bg-zinc-900
+        bg-white
+        dark:bg-zinc-900
         px-5
         py-3
         text-md
         font-medium
-        text-white
+        text-slate-900
+        dark:text-white
         shadow-xl
         ring-1
         ring-white/10

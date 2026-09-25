@@ -4,14 +4,16 @@ function SkeletonCard() {
       className="
 animate-pulse
 rounded-xl
-bg-zinc-800
+bg-slate-200
+dark:bg-zinc-800
 overflow-hidden
 "
     >
       <div
         className="
 h-[350px]
-bg-zinc-700
+bg-slate-300
+dark:bg-zinc-700
 "
       />
 
@@ -26,7 +28,8 @@ p-4
 h-4
 w-3/4
 rounded
-bg-zinc-700
+bg-slate-300
+dark:bg-zinc-700
 "
         />
 

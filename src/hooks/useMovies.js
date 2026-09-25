@@ -19,11 +19,18 @@ export default function useMovies(endpoint, { append = false } = {}) {
           signal: controller.signal,
         });
 
-        setMovies((currentMovies) =>
-          append
-            ? [...currentMovies, ...(data.results || [])]
-            : data.results || [],
-        );
+        setMovies((currentMovies) => {
+          const incomingMovies = data.results || [];
+
+          if (!append) return incomingMovies;
+
+          const existingIds = new Set(currentMovies.map((movie) => movie.id));
+          const newMovies = incomingMovies.filter(
+            (movie) => !existingIds.has(movie.id),
+          );
+
+          return [...currentMovies, ...newMovies];
+        });
         setTotalPages(data.total_pages || 1);
       } catch (error) {
         if (error.name !== "AbortError") {

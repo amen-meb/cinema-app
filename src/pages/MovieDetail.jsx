@@ -83,8 +83,8 @@ function MovieDetail() {
 
   if (error) {
     return (
-      <div className="rounded-xl bg-red-950 p-8 text-center">
-        <h1 className="text-xl font-bold text-red-400">Something went wrong</h1>
+      <div className="rounded-xl bg-red-50 p-8 text-center dark:bg-red-950">
+      <h1 className="text-xl font-bold text-red-700 dark:text-red-400">Something went wrong</h1>
 
         <p className="mt-2 text-gray-400">{error}</p>
       </div>

@@ -110,6 +110,7 @@ function DetailHero({
             className="
               text-4xl
               font-bold
+              text-white
               md:text-6xl
             "
           >
@@ -181,6 +182,7 @@ function DetailHero({
                     px-6
                     py-3
                     font-semibold
+                    text-white
                     transition
                     hover:bg-red-700
                     disabled:cursor-not-allowed
@@ -201,6 +203,7 @@ function DetailHero({
                 px-6
                 py-3
                 font-semibold
+                text-white
                 backdrop-blur
                 transition
                 hover:bg-white/20

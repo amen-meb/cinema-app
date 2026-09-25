@@ -5,7 +5,7 @@ import useMovies from "../hooks/useMovies";
 import MovieGrid from "../components/movie/MovieGrid";
 import SkeletonCard from "../components/movie/SkeletonCard";
 
-import GenreFilter from "../components/ui/GenreFilter";
+import Sidebar from "../components/ui/Sidebar";
 import SortSelect from "../components/ui/SortSelect";
 
 import { fetchFromTMDB } from "../services/tmdb";
@@ -68,7 +68,9 @@ function Browse() {
 
     if (selectedGenre !== null) {
       result = result.filter((movie) =>
-        movie.genre_ids?.includes(selectedGenre),
+        movie.genre_ids?.some(
+          (genreId) => String(genreId) === String(selectedGenre),
+        ),
       );
     }
 
@@ -121,45 +123,49 @@ function Browse() {
         <p className="mt-2 text-gray-400">Discover movies from TMDB.</p>
       </header>
 
-      <GenreFilter
-        genres={genres}
-        selectedGenre={selectedGenre}
-        onGenreChange={setSelectedGenre}
-      />
-      {genreError && <p className="mb-4 text-sm text-red-300">{genreError}</p>}
+      <div className="grid items-start gap-8 lg:h-[calc(100vh-12rem)] lg:min-h-0 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <div className="lg:h-full lg:overflow-y-auto lg:pr-2">
+          <Sidebar
+            genres={genres}
+            selectedGenre={selectedGenre}
+            onGenreChange={setSelectedGenre}
+          />
+          {genreError && <p className="mt-3 text-sm text-red-300">{genreError}</p>}
+        </div>
 
-      <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
+        <section className="lg:h-full lg:overflow-y-auto lg:pr-2">
+          <SortSelect sortOption={sortOption} onSortChange={setSortOption} />
 
-      <div className="mb-8 flex flex-wrap items-center gap-3">
-        <span className="text-sm font-semibold text-slate-700 dark:text-white">
-          Release year:
-        </span>
-        <input
-          type="number"
-          min="1900"
-          max="2100"
-          value={minYear}
-          onChange={(event) => setMinYear(event.target.value)}
-          placeholder="From"
-          aria-label="Minimum release year"
-          className="w-28 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
-        />
-        <span className="text-slate-500 dark:text-gray-400">to</span>
-        <input
-          type="number"
-          min="1900"
-          max="2100"
-          value={maxYear}
-          onChange={(event) => setMaxYear(event.target.value)}
-          placeholder="To"
-          aria-label="Maximum release year"
-          className="w-28 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
-        />
-      </div>
+          <div className="mb-8 flex flex-wrap items-center gap-3">
+            <span className="text-sm font-semibold text-slate-700 dark:text-white">
+              Release year:
+            </span>
+            <input
+              type="number"
+              min="1900"
+              max="2100"
+              value={minYear}
+              onChange={(event) => setMinYear(event.target.value)}
+              placeholder="From"
+              aria-label="Minimum release year"
+              className="w-28 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            />
+            <span className="text-slate-500 dark:text-gray-400">to</span>
+            <input
+              type="number"
+              min="1900"
+              max="2100"
+              value={maxYear}
+              onChange={(event) => setMaxYear(event.target.value)}
+              placeholder="To"
+              aria-label="Maximum release year"
+              className="w-28 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            />
+          </div>
 
-      {loading && (
-        <div
-          className="
+          {loading && (
+            <div
+              className="
             grid
             grid-cols-2
             gap-6
@@ -167,42 +173,44 @@ function Browse() {
             md:grid-cols-4
             xl:grid-cols-5
           "
-        >
-          {Array.from({ length: 10 }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
-      )}
-
-      {error && (
-        <div className="rounded-lg bg-red-950 p-6 text-center text-red-300">
-          <p className="text-lg font-semibold">Something went wrong</p>
-
-          <p className="mt-2">{error}</p>
-        </div>
-      )}
-
-      {!loading && !error && (
-        <>
-          {filteredMovies.length > 0 ? (
-            <MovieGrid movies={filteredMovies} />
-          ) : (
-            <div className="py-20 text-center">
-              <p className="text-xl text-gray-400">No movies found.</p>
+            >
+              {Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
             </div>
           )}
-        </>
-      )}
 
-      <div
-        data-browse-sentinel
-        className="flex min-h-20 items-center justify-center py-8 text-sm text-gray-400"
-      >
-        {loading && page > 1
-          ? "Loading more movies..."
-          : page >= totalPages
-            ? "You have reached the end."
-            : ""}
+          {error && (
+            <div className="rounded-lg bg-red-950 p-6 text-center text-red-300">
+              <p className="text-lg font-semibold">Something went wrong</p>
+
+              <p className="mt-2">{error}</p>
+            </div>
+          )}
+
+          {!loading && !error && (
+            <>
+              {filteredMovies.length > 0 ? (
+                <MovieGrid movies={filteredMovies} />
+              ) : (
+                <div className="py-20 text-center">
+                  <p className="text-xl text-gray-400">No movies found.</p>
+                </div>
+              )}
+            </>
+          )}
+
+          <div
+            data-browse-sentinel
+            className="flex min-h-20 items-center justify-center py-8 text-sm text-gray-400"
+          >
+            {loading && page > 1
+              ? "Loading more movies..."
+              : page >= totalPages
+                ? "You have reached the end."
+                : ""}
+          </div>
+        </section>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ export default function SeriesDetail() {
     );
   if (error)
     return (
-      <div className="rounded-xl bg-red-950 p-8 text-center text-red-300">
+      <div className="rounded-xl bg-red-50 p-8 text-center text-red-700 dark:bg-red-950 dark:text-red-300">
         {error}
       </div>
     );
